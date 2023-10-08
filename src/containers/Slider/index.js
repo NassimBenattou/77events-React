@@ -15,9 +15,11 @@ const Slider = () => {
 
   const nextCard = () => {
 
+    // Vérifie si la variable 'byDateDesc' n'est pas définie
     if(byDateDesc !== undefined){
 
       setTimeout(
+        // Condition ternaire pour le défilement
         () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
         5000
       );

@@ -19,6 +19,8 @@ const EventList = () => {
 
     if(data?.events){
 
+      // Filtrer les événements en fonction du type sélectionné
+
       const filteredEvents = data.events.filter((event) =>
     
         !type || event.type === type
@@ -33,9 +35,12 @@ const EventList = () => {
   const changeType = (evtType) => {
 
     setCurrentPage(1);
+
+    // Récupère la catégorie dans le Select et la setState
     setType(evtType);
   };
 
+  // Calcul du total de pages pour afficher tous les événements
   const pageNumber = Math.ceil((sortedEvents.length || 0) / PER_PAGE);
   const typeList = new Set(data?.events.map((event) => event.type));
 
@@ -51,7 +56,7 @@ const EventList = () => {
             selection={Array.from(typeList)}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
           />
-          <div id="events" className="ListContainer">
+          <div id="events" data-testid= "event-list" className="ListContainer">
             {sortedEvents
               .slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
               .map((event) => (
